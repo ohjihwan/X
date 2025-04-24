@@ -1,9 +1,9 @@
-let posts = [
+let users = [
 	{
 		id: "1",
 		name: "김사과",
 		userid: "apple",
-		text: "Node.js 배우는 중인데 Express 진짜 편하다! :로켓:",
+		text: "auth!! Node.js 배우는 중인데 Express 진짜 편하다! :로켓:",
 		createdAt: Date.now().toString(),
 		url: "https://randomuser.me/api/portraits/women/32.jpg",
 	},
@@ -59,4 +59,8 @@ export async function login(userid, password) {
 		(user) => user.userid === userid && user.password === password
 	)
 	return user;
+}
+
+export async function findUserById(userid) {
+	return users.find((user) => user.userid === userid);
 }
