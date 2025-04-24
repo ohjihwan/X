@@ -30,7 +30,7 @@ export async function createPost(req, res, next) {
 // 포스트를 수정하는 함수
 export async function editPost(req, res, next) {
 	const id = req.params.id;
-	const text = req.params.text;
+	const text = req.body.text;
 	const post = await postRepository.update(id, text);
 	if(post) {
 		res.status(201).json(post);

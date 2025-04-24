@@ -1,1 +1,0 @@
-s.status(201).json(put);
