@@ -1,4 +1,4 @@
-let posts = [
+let users = [
 	{
 		id: "1",
 		name: "김사과",
