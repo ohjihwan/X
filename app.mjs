@@ -1,6 +1,6 @@
 import express from "express";
-import postsRouter from "router/posts.mjs"
-import authRouter from "router/auth.mjs"
+import postsRouter from "./router/posts.mjs"
+import authRouter from "./router/auth.mjs"
 
 const app = express();
 
