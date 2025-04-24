@@ -1,4 +1,4 @@
-let posts = [
+let users = [
 	{
 		id: "1",
 		name: "김사과",
@@ -59,4 +59,8 @@ export async function login(userid, password) {
 		(user) => user.userid === userid && user.password === password
 	)
 	return user;
+}
+
+export async function findUserById(userid) {
+	return users.find((user) => user.userid === userid);
 }
