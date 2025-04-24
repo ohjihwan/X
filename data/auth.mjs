@@ -3,7 +3,7 @@ let users = [
 		id: "1",
 		name: "김사과",
 		userid: "apple",
-		text: "Node.js 배우는 중인데 Express 진짜 편하다! :로켓:",
+		text: "auth!! Node.js 배우는 중인데 Express 진짜 편하다! :로켓:",
 		createdAt: Date.now().toString(),
 		url: "https://randomuser.me/api/portraits/women/32.jpg",
 	},

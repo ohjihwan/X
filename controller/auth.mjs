@@ -2,7 +2,7 @@ import * as authRepository from '../data/auth.mjs'
 
 export async function signup(req, res, next){
 	const {userid, password, name, email} = req.body;
-	const users = await authRepository.createIser(userid, password, name, email);
+	const users = await authRepository.createUser(userid, password, name, email);
 	if(users) {
 		res.status(201).json(users)
 	}
