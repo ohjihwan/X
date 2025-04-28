@@ -17,7 +17,7 @@ const validateLogin = [
 
 const validateSignup = [
 	...validateLogin,
-	body("naim").trim().notEmpty().withMessage('name 입력'),
+	body("name").trim().notEmpty().withMessage('name 입력'),
 	body("email").trim().notEmpty().withMessage('이메일 형식 확인'),
 	validate, 
 ]
@@ -29,9 +29,9 @@ router.post("/signup", validateSignup, authController.signup);
 router.post("/login", validateLogin, authController.login);
 
 // 로그인 유지 (세션 정보 확인)
-router.get("/me", authController.getMe); // 이 부분이 있는지 확인!
+// router.get("/me", authController.getMe); // 이 부분이 있는지 확인!
 
 // 로그아웃 (세션 삭제)
-router.get("/logout", authController.logout);
+// router.get("/logout", authController.logout);
 
 export default router;
