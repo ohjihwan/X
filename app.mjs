@@ -2,7 +2,7 @@ import express from "express";
 import session from 'express-session';
 import postsRouter from "./router/posts.mjs"
 import authRouter from "./router/auth.mjs"
-import { config } from "config.mjs"
+import { config } from "./config.mjs"
 
 const app = express();
 
