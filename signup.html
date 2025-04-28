@@ -36,22 +36,22 @@
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ userid, password, name, email })
+			body: JSON.stringify({ userid, password, name, email })
 		});
 
 		const data = await response.json();
 
 		if (response.ok) {
-		alert('회원가입 성공! 🎉');
+			alert('회원가입 성공! 🎉');
 
-		// 🎯 토큰 저장 (선택사항)
-		localStorage.setItem('token', data.token);
-		localStorage.setItem('userid', data.userid);
+			// 🎯 토큰 저장 (선택사항)
+			localStorage.setItem('token', data.token);
+			localStorage.setItem('userid', data.userid);
 
-		// 🎯 로그인 페이지로 이동
-		window.location.href = 'login.html';
+			// 🎯 로그인 페이지로 이동
+			window.location.href = 'login.html';
 		} else {
-		alert(`회원가입 실패: ${data.message || '서버 오류'}`);
+			alert(`회원가입 실패: ${data.message || '서버 오류'}`);
 		}
 	} catch (error) {
 		alert('회원가입 요청 실패: 네트워크 오류');
