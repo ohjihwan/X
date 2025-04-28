@@ -24,6 +24,10 @@ app.use(session({
 app.use('/posts', postsRouter);
 app.use('/auth', authRouter);
 
+app.get('/', (req, res) => {
+  res.send('Server is up and running!');
+});
+
 app.use((req, res, next) => {
   res.sendStatus(404);
 })
