@@ -42,8 +42,13 @@
 
         if (response.ok) {
             alert('로그인 성공! 🎉');
-            console.log(data);
-            resultDiv.innerText = `토큰: ${data.token}\n아이디: ${data.userid}`;
+
+            // 토큰 저장
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userid', data.userid);
+
+            // 바로 post.html로 이동
+            window.location.href = 'post.html';
         } else {
             alert(`로그인 실패: ${data.message || '서버 오류'}`);
         }
