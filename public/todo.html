@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>TODO 리스트</title>
+</head>
+<body>
+	<h1>나의 TODO 리스트</h1>
+	<ul id="todo-list"></ul>
+
+<script>
+	const token = localStorage.getItem('token');
+	const todoList = document.getElementById('todo-list');
+	const todoForm = document.getElementById('todo-form');
+	const newTodoInput = document.getElementById('new-todo');
+
+	if (!token) {
+		alert('로그인이 필요합니다.');
+		window.location.href = 'login.html';
+	}
+
+	async function fetchTodos() {
+		const response = await fetch('/todos', {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+
+		const todos = await response.json();
+		todoList.innerHTML = '';
+
+		todos.forEach(todo => {
+			const li = document.createElement('li');
+			li.innerHTML = `
+				<span>[${todo.completed ? '완료' : '미완료'}] ${todo.title}</span>
+				<div class="actions">
+					<button onclick="toggleComplete(${todo.id}, ${!todo.completed})">✅</button>
+					<button onclick="deleteTodo(${todo.id})">🗑️</button>
+				</div>
+			`;
+			todoList.appendChild(li);
+		});
+	}
+
+	todoForm.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const title = newTodoInput.value.trim();
+		if (!title) return;
+
+		await fetch('/todos', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({ title })
+		});
+
+		newTodoInput.value = '';
+		fetchTodos();
+	});
+
+	async function toggleComplete(id, completed) {
+		await fetch(`/todos/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
+			},
+			body: JSON.stringify({ title: '업데이트 없음', completed })
+		});
+
+		fetchTodos();
+	}
+
+	async function deleteTodo(id) {
+		await fetch(`/todos/${id}`, {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+
+		fetchTodos();
+	}
+
+	fetchTodos();
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import * as userModel from '../models/user.model.mjs'
+import * as userModel from '../models/user.mjs'
 import * as bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.mjs"

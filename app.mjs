@@ -6,6 +6,8 @@ import session from "express-session";
 import postsRouter from "./router/posts.mjs"
 import authRouter from "./router/auth.mjs"
 import { config } from "./config.mjs"
+import todoRoutes from './routes/todo.mjs';
+
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +16,7 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/todos', todoRoutes);
 
 app.use(session({
   secret: '!@#$%^&*()',
