@@ -30,7 +30,8 @@
         }
 
         try {
-        const response = await fetch('/auth/login', {
+        const BASE_URL = location.origin;
+        const response = await fetch(`${BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

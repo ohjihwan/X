@@ -31,7 +31,8 @@
 	}
 
 	try {
-		const response = await fetch('/auth/signup', {
+		const BASE_URL = location.origin;
+		const response = await fetch(`${BASE_URL}/auth/signup`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
