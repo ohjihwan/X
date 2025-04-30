@@ -5,7 +5,7 @@ import cors from "cors";
 import session from "express-session";
 import postsRouter from "./router/posts.mjs";
 import authRouter from "./router/auth.mjs";
-import todoRoutes from './routes/todo.mjs';
+import todoRoutes from './router/todo.mjs';
 import { config } from "./config.mjs";
 
 const app = express();
