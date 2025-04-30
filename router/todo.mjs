@@ -1,5 +1,5 @@
 import express from 'express';
-import * as todoController from '../controllers/todo.mjs';
+import * as todoController from '../controller/todo.mjs';
 import { isAuth } from '../middleware/auth.mjs';
 
 const router = express.Router();
