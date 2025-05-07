@@ -1,4 +1,4 @@
-let users = [
+/* let users = [
 	{
 		id: "1",
 		name: "김사과",
@@ -39,7 +39,7 @@ let users = [
 		createdAt: Date.now().toString(),
 		url: "https://randomuser.me/api/portraits/men/29.jpg",
 	},
-];
+]; */
 
 export async function createUser(userid, password, name, email) {
 	const user = {

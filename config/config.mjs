@@ -14,7 +14,7 @@ export const config = {
 		host: required('DB_HOST'),
 		user: required('DB_USER'),
 		password: required('DB_PASSWORD'),
-		database: required('DB_NAME')
+		database: required('DB_DATABASE')
 	},
 	jwt:{
 		secretKey: required('JWT_SECRET', 'secret'),

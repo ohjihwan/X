@@ -6,6 +6,7 @@ import session from "express-session";
 import postsRouter from "./router/posts.mjs"
 import authRouter from "./router/auth.mjs"
 import { config } from "./config.mjs"
+import { db } from './db/database.mjs'
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -37,4 +38,6 @@ app.use((req, res, next) => {
 })
 
 const PORT = process.env.PORT || config.host.port
+
+// db.getConnection().then((connection) => console.log(connection));
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));

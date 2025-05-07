@@ -9,40 +9,58 @@
     <ul id="post-list"></ul>
 
     <script>
-      // 저장된 토큰 불러오기
-      const token = localStorage.getItem('token');
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
 
-      // 토큰이 없으면 로그인 페이지로 강제 이동
-      if (!token) {
-          alert('로그인이 필요합니다.');
-          window.location.href = 'login.html';
-      }
+            // 토큰 확인 및 로그인 페이지 이동
+            if (!token) {
+                alert('로그인이 필요합니다.');
+                window.location.href = 'login.html';
+                return;
+            }
 
-      // 토큰이 있으면 posts API 호출
-      fetch('/posts', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-      })
-      .then(response => {
-          if (!response.ok) {
-            throw new Error('포스트 불러오기 실패');
-          }
-          return response.json();
-      })
-      .then(posts => {
-          const postList = document.getElementById('post-list');
-          posts.forEach(post => {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${post.name}</strong>: ${post.text}`;
-            postList.appendChild(li);
-          });
-      })
-      .catch(error => {
-          console.error('에러:', error);
-          alert('포스트를 불러오는 중 문제가 발생했습니다.');
-      });
+            // 포스트 목록 불러오기
+            fetchPosts(token);
+        });
+
+        // 포스트 불러오기 함수
+        function fetchPosts(token) {
+            fetch('/auth/posts', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        alert('로그인 인증이 만료되었습니다. 다시 로그인하세요.');
+                        window.location.href = 'login.html';
+                    }
+                    throw new Error(`오류 코드: ${response.status} - 포스트 불러오기 실패`);
+                }
+                return response.json();
+            })
+            .then(posts => {
+                const postList = document.getElementById('post-list');
+                postList.innerHTML = '';
+
+                if (posts.length === 0) {
+                    postList.innerHTML = '<li>등록된 포스트가 없습니다.</li>';
+                    return;
+                }
+
+                posts.forEach(post => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${post.name}</strong>: ${post.text}`;
+                    postList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('에러 발생:', error);
+                alert('포스트를 불러오는 중 문제가 발생했습니다. 관리자에게 문의하세요.');
+            });
+        }
     </script>
 </body>
 </html>
